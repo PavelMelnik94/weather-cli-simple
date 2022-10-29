@@ -1,5 +1,5 @@
 import { homedir } from "os";
-import { join, basename } from "path";
+import { join } from "path";
 import { promises } from "fs";
 import { logger } from "./log.service.js";
 

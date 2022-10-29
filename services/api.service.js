@@ -1,8 +1,6 @@
 import axios from "axios";
-import https from "https";
+import { TOKEN_DICTIONARY } from "../helpers/transformers.js";
 import { storage } from "./storage.service.js";
-
-const { TOKEN_DICTIONARY } = storage;
 
 const getIcon = (icon) => {
     switch (icon.slice(0, -1)) {
@@ -28,9 +26,7 @@ const getIcon = (icon) => {
 };
 
 const getWeather = async (city) => {
-    const token =
-        process.env.API_KEY ??
-        (await storage.getKeyValue(TOKEN_DICTIONARY.token));
+    const token = await storage.getKeyValue(TOKEN_DICTIONARY.token);
 
     if (!token) {
         throw new Error(

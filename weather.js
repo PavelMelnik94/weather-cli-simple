@@ -23,9 +23,7 @@ const saveFlagValue = async (flag, value) => {
 
 const getForcast = async () => {
     try {
-        const city =
-            process.env.CITY ??
-            (await storage.getKeyValue(TOKEN_DICTIONARY.city));
+        const city = await storage.getKeyValue(TOKEN_DICTIONARY.city);
         const weather = await getWeather(city);
         logger.printWeather(weather, getIcon(weather.weather[0].icon));
     } catch (error) {
