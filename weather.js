@@ -21,6 +21,21 @@ const saveToken = async (token) => {
     }
 };
 
+const getForcast = async () => {
+    try {
+        const weather = await getWeather("minsk");
+        console.log(weather);
+    } catch (error) {
+        if (error?.response?.status === 404) {
+            logger.printError("Неверно указан город");
+        } else if (error?.response?.status === 401) {
+            logger.printError("Неверный токен");
+        } else {
+            logger.printError(error.message);
+        }
+    }
+};
+
 const init = () => {
     const args = getArgs(process.argv);
 
@@ -32,7 +47,7 @@ const init = () => {
 
     if (args.t) saveToken(args.t);
 
-    getWeather("minsk");
+    getForcast();
 };
 
 init();
