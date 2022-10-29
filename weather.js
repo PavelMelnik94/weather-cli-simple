@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { getArgs } from "./helpers/args.js";
 import { TOKEN_DICTIONARY, FLAG_RU } from "./helpers/transformers.js";
-import { getWeather } from "./services/api.service.js";
+import { getIcon, getWeather } from "./services/api.service.js";
 import { logger } from "./services/log.service.js";
 import { storage } from "./services/storage.service.js";
 
@@ -23,8 +23,11 @@ const saveFlagValue = async (flag, value) => {
 
 const getForcast = async () => {
     try {
-        const weather = await getWeather("minsk");
-        console.log(weather);
+        const city =
+            process.env.CITY ??
+            (await storage.getKeyValue(TOKEN_DICTIONARY.city));
+        const weather = await getWeather(city);
+        logger.printWeather(weather, getIcon(weather.weather[0].icon));
     } catch (error) {
         if (error?.response?.status === 404)
             logger.printError("Неверно указан город");
@@ -39,11 +42,11 @@ const getForcast = async () => {
 const init = () => {
     const args = getArgs(process.argv);
 
-    if (args.h) logger.printHelp();
-    if (args.c) saveFlagValue(TOKEN_DICTIONARY.city, args.c);
-    if (args.t) saveFlagValue(TOKEN_DICTIONARY.token, args.t);
+    if (args.h) return logger.printHelp();
+    if (args.c) return saveFlagValue(TOKEN_DICTIONARY.city, args.c);
+    if (args.t) return saveFlagValue(TOKEN_DICTIONARY.token, args.t);
 
-    getForcast();
+    return getForcast();
 };
 
 init();
