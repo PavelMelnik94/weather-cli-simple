@@ -1,5 +1,5 @@
 import { Chalk } from "chalk";
-import { params } from "./params.js";
+import { params } from "../helpers/params.js";
 
 const chalk = new Chalk({ enabled: true });
 
