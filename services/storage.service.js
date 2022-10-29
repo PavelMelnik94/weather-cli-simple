@@ -5,11 +5,6 @@ import { logger } from "./log.service.js";
 
 const filePath = join(homedir(), "weather-data.json");
 
-const TOKEN_DICTIONARY = {
-    token: "token",
-    city: "city",
-};
-
 const saveKeyValue = async (key, value) => {
     let data = {};
 
@@ -46,7 +41,6 @@ const isExist = async (path) => {
 const storage = {
     saveKeyValue,
     getKeyValue,
-    TOKEN_DICTIONARY,
 };
 
 export { storage };
