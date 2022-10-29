@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import { getArgs } from "./helpers/args.js";
+import { logger } from "./services/log.service.js";
 
 const init = () => {
     const args = getArgs(process.argv);
-    console.log(args);
+
     if (args.h) {
-        // show help
+        logger.printHelp();
     }
     if (args.s) {
         // save city
