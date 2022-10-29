@@ -1,0 +1,21 @@
+{
+  "name": "weather-cli-simple",
+  "author": "Pavel Melnik",
+  "description": "simple nodejs weather cli",
+  "keywords": ["weather","cli"],
+  "license": "ISC",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": "index.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PavelMelnik94/weather-cli-simple"
+},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
