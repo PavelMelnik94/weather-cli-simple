@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import * as dotenv from "dotenv";
+dotenv.config();
 import { getArgs } from "./helpers/args.js";
 import { getWeather } from "./services/api.service.js";
 import { logger } from "./services/log.service.js";
